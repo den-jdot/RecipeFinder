@@ -45,11 +45,11 @@ function App() {
     <>
     <main className="RecipeApp">
     <FilterArea></FilterArea>
-    <hr />
+    <div className="divider" />
     <ResultArea></ResultArea>
-    <hr />
+    <div className="divider" />
     <RecipeArea></RecipeArea>
-    <hr />
+    <div className="divider" />
     <FavoritesArea></FavoritesArea>
     </main> 
     </>

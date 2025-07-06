@@ -24,15 +24,12 @@ export default function ResultItem(props) {
         </Box>
         <Divider sx={{ width: '100%'}} />
         <Box sx={{ p: 2 }}>
-          <Typography gutterBottom variant="h6" component="div">
+          <Typography gutterBottom variant="body2" component="div">
             {props.itemAmount}
           </Typography>
         </Box>
       <Divider sx={{ width: '100%'}} />
       <Box sx={{ p: 2 }}>
-        <Typography gutterBottom variant="body2">
-          Difficulty
-        </Typography>
         <Stack direction="row" spacing={1}>
           <Chip color="primary" label="Simple" size="small" />
           <Chip label="Medium" size="small" />

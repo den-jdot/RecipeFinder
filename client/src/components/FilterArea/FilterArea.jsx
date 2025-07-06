@@ -4,11 +4,14 @@ import { useRef, useState, useEffect } from 'react';
 import SourceSelector from './FilterAreaButtons/SourceSelector';
 import GenButton from './FilterAreaButtons/GenButton';
 import IngredientsToggle from './FilterAreaButtons/IngredientsToggle';
-import CustomizedSelects from './FilterAreaButtons/CustomizedSelects';
 import StapleToggle from './StapleList/StapleToggle';
 import PantryToggle from './PantryList/PantryToggle';
 import StapleList from './StapleList/StapleList';
 import PantryList from './PantryList/PantryList';
+import KeywordField from './FilterAreaButtons/keywordField';
+import AddField from '../AddField';
+import ScopeField from './FilterAreaButtons/ScopeField';
+import DiffField from './FilterAreaButtons/DiffField';
 
 const FilterArea = () => {
 return (
@@ -18,7 +21,11 @@ return (
         <div className="FilterAreaButtons">
             <div className="FilterAreaButtonsLeft">
             <SourceSelector></SourceSelector>
-            <CustomizedSelects></CustomizedSelects>
+            <KeywordField></KeywordField>
+            <div className="OptionalFields">
+                <ScopeField></ScopeField>
+                <DiffField></DiffField>
+            </div>
             </div>
             <GenButton></GenButton>
             
@@ -31,15 +38,13 @@ return (
         <div className="IngredientsArea">
         <StapleToggle></StapleToggle>
         <StapleList></StapleList>
+        <AddField></AddField>
 
         <PantryToggle></PantryToggle>
         <PantryList></PantryList>
+        <AddField></AddField>
 
         </div>
-    
-
-    <h1>Filter Area</h1>
-
     </main>
     </>
 )};
