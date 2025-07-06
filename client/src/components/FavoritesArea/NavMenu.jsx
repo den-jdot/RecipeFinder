@@ -5,6 +5,7 @@ import ViewQuiltIcon from '@mui/icons-material/ViewQuilt';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import Typography from '@mui/material/Typography';
+import PageviewTwoToneIcon from '@mui/icons-material/PageviewTwoTone';
 
 export default function NavMenu() {
   const [view, setView] = React.useState('list');
@@ -25,7 +26,7 @@ export default function NavMenu() {
       onChange={handleChange}
     >
       <ToggleButton value="search" aria-label="search" className="navMenuButton">
-        <ViewListIcon />
+        <PageviewTwoToneIcon />
             <Typography gutterBottom variant="caption" component="div" sx={navFontSize}>
             Search
             </Typography>
