@@ -67,6 +67,7 @@ html, body {
 
 .FavoritesArea {
   width:120px;
+  min-width: 120px;
   padding: 1rem;
 }
 
