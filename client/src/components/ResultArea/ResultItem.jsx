@@ -31,7 +31,7 @@ export default function ResultItem(props) {
       <Divider sx={{ width: '100%'}} />
       <Box sx={{ p: 2 }}>
         <Stack direction="row" spacing={1}>
-          <Chip color="primary" label="Simple" size="small" />
+          <Chip color="primary" label="Easy" size="small" />
           <Chip label="Medium" size="small" />
           <Chip label="Hard" size="small" />
         </Stack>

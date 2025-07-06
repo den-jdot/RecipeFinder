@@ -52,7 +52,13 @@ const RecipeArea = () => {
         />
 
         <h2>Difficulty</h2>
-        <h2>Details</h2>
+        <p>
+          Easy
+        </p>
+        <h2>Instructions</h2>
+        <p>
+          1. Dissolve the yeast in the lukewarm water. Then mix it with the flour and salt  in a bowl until a dough forms.
+        </p>
       </div>
     </>
   );

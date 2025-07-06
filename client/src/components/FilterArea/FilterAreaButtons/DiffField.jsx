@@ -24,7 +24,7 @@ export default function SelectVariants() {
           <MenuItem value="">
             <em>None</em>
           </MenuItem>
-          <MenuItem value={"Simple"}>Simple</MenuItem>
+          <MenuItem value={"Easy"}>Easy</MenuItem>
           <MenuItem value={"Medium"}>Medium</MenuItem>
           <MenuItem value={"Hard"}>Hard</MenuItem>
         </Select>
