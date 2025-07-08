@@ -6,50 +6,35 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import Checkbox from '@mui/material/Checkbox';
 import IconButton from '@mui/material/IconButton';
-import CommentIcon from '@mui/icons-material/Comment';
+import BlenderIcon from '@mui/icons-material/Blender';
+import DeleteIcon from '@mui/icons-material/Delete';
 
-export default function StapleList() {
-  const [checked, setChecked] = React.useState([0]);
+export default function StapleList({staples, setStaples}) {
 
-  const handleToggle = (value) => () => {
-    const currentIndex = checked.indexOf(value);
-    const newChecked = [...checked];
-
-    if (currentIndex === -1) {
-      newChecked.push(value);
-    } else {
-      newChecked.splice(currentIndex, 1);
-    }
-
-    setChecked(newChecked);
+const handleDelete = (stapleToRemove) => {
+  setStaples((prev) => prev.filter(item => item !== stapleToRemove));
   };
 
   return (
     <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
-      {[0, 1, 2, 3].map((value) => {
+      {staples.map((value, index) => {
         const labelId = `checkbox-list-label-${value}`;
 
         return (
           <ListItem
-            key={value}
+            key={index}
             secondaryAction={
-              <IconButton edge="end" aria-label="comments">
-                <CommentIcon />
+              <IconButton edge="end" aria-label="delete" onClick={() => handleDelete(value)}>
+                <DeleteIcon />
               </IconButton>
             }
             disablePadding
           >
-            <ListItemButton role={undefined} onClick={handleToggle(value)} dense>
+            <ListItemButton role={undefined}>
               <ListItemIcon>
-                <Checkbox
-                  edge="start"
-                  checked={checked.includes(value)}
-                  tabIndex={-1}
-                  disableRipple
-                  inputProps={{ 'aria-labelledby': labelId }}
-                />
+                <BlenderIcon />
               </ListItemIcon>
-              <ListItemText id={labelId} primary={`Line item ${value + 1}`} />
+              <ListItemText id={labelId} primary={`${value}`} />
             </ListItemButton>
           </ListItem>
         );

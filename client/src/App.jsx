@@ -6,9 +6,6 @@ import ResultArea from './components/ResultArea/ResultArea';
 import RecipeArea from './components/RecipeArea/RecipeArea';
 
 function App() {
-  const staplesRef = useRef();
-  const ingredientsRef = useRef();
-  const recipesRef = useRef();
   
   const [staples, setStaples] = useState(() => {
     try {
@@ -20,9 +17,9 @@ function App() {
     }
   });
 
-  const [ingredients, setIngredients] = useState(() => {
+  const [pantry, setPantry] = useState(() => {
     try {
-      const stored = localStorage.getItem('ingredients');
+      const stored = localStorage.getItem('pantry');
       const parsed = JSON.parse(stored);
       return Array.isArray(parsed) ? parsed : [];
     } catch {
@@ -40,11 +37,59 @@ function App() {
     }
   });
 
+  const [showStaples, setShowStaples] = useState(() => {
+    try {
+      const stored = localStorage.getItem('showStaples');
+      return stored !== null ? JSON.parse(stored) : true;
+    } catch {
+      return true;
+    }
+  });
+
+  const [showPantry, setShowPantry] = useState(() => {
+    try {
+      const stored = localStorage.getItem('showPantry');
+      return stored !== null ? JSON.parse(stored) : true;
+    } catch {
+      return true;
+    }
+  });
+
+  useEffect(() => {
+    localStorage.setItem('staples', JSON.stringify(staples));
+  }, [staples]);
+
+  useEffect(() => {
+    localStorage.setItem('pantry', JSON.stringify(pantry));
+    }, [pantry]);
+
+  useEffect(() => {
+    localStorage.setItem('recipes', JSON.stringify(recipes));
+  }, [recipes]);
+
+  useEffect(() => {
+    localStorage.setItem('showStaples', JSON.stringify(showStaples));
+  }, [showStaples]);
+
+  useEffect(() => {
+    localStorage.setItem('showPantry', JSON.stringify(showPantry));
+  }, [showPantry]);
+
 
   return (
     <>
     <main className="RecipeApp">
-    <FilterArea></FilterArea>
+    <FilterArea
+      staples={staples}
+      setStaples={setStaples}
+      pantry={pantry}
+      setPantry={setPantry}
+      showStaples={showStaples}
+      setShowStaples={setShowStaples}
+      showPantry={showPantry}
+      setShowPantry={setShowPantry}>
+    </FilterArea>
+
     <div className="divider" />
     <ResultArea></ResultArea>
     <div className="divider" />

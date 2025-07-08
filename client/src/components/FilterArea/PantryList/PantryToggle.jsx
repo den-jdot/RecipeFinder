@@ -5,14 +5,22 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 
-export default function PantryToggle() {
+export default function PantryToggle({ showPantry, setShowPantry }) {
+  const handleToggle = (event) => {
+    setShowPantry(event.target.checked);
+  };
+
   return (
     <FormControl component="fieldset">
-      <FormGroup aria-label="position" row>
-
+      <FormGroup row>
         <FormControlLabel
-          value="Show Pantry"
-          control={<Switch color="primary" />}
+          control={
+            <Switch
+              color="primary"
+              checked={showPantry}
+              onChange={handleToggle}
+            />
+          }
           label="Show Pantry"
           labelPlacement="end"
         />

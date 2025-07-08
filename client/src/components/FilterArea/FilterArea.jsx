@@ -13,7 +13,19 @@ import AddField from '../AddField';
 import ScopeField from './FilterAreaButtons/ScopeField';
 import DiffField from './FilterAreaButtons/DiffField';
 
-const FilterArea = () => {
+
+
+const FilterArea = ({ 
+    staples, setStaples,
+    pantry, setPantry,
+    showStaples, setShowStaples,
+    showPantry, setShowPantry
+ }) => {
+
+    const addStaple = (item) => setStaples((prev) => [...prev, item]);
+    const addPantry = (item) => setPantry((prev) => [...prev, item]);
+    
+
 return (
     <>
     <main className="FilterArea">
@@ -36,13 +48,30 @@ return (
         </div>
 
         <div className="IngredientsArea">
-        <StapleToggle></StapleToggle>
-        <StapleList></StapleList>
-        <AddField></AddField>
 
-        <PantryToggle></PantryToggle>
-        <PantryList></PantryList>
-        <AddField></AddField>
+            <div className="StapleArea">
+                <StapleToggle showStaples={showStaples} setShowStaples={setShowStaples}></StapleToggle>
+                {/*if showStaples = true, then show list, otherwise null
+                showStaples ? <StapleList : null*/}
+                {showStaples && (
+                    <>
+                        <StapleList staples={staples} setStaples={setStaples}></StapleList>
+                        <AddField onAdd={addStaple}></AddField>
+                    </>
+                )}
+            </div>
+        
+            <div className="PantryArea">
+                <PantryToggle showPantry={showPantry} setShowPantry={setShowPantry}></PantryToggle>
+                {/*if showPantry = true, then show list, otherwise null
+                showPantry ? <PantryList : null*/}
+                {showPantry && (
+                    <>
+                        <PantryList pantry={pantry} setPantry={setPantry}></PantryList>
+                        <AddField onAdd={addPantry}></AddField>
+                    </>
+                )}
+            </div>
 
         </div>
     </main>

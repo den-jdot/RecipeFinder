@@ -10,3 +10,24 @@ export default function GenButton() {
     </Stack>
   );
 }
+
+// // let paramString += Array.map((el,idx) => {
+//       if(idx == 0) {
+//          return `${el} `
+//      } else {
+//         return ,+${el} `
+//  }
+
+// //Format: "<url>?ingridients="apple,+banana,+kiwi,...+,Grape";
+
+// async function getRecipes() {
+// query =   ingridients= ${deineAufgabe}  `
+// const config = {
+// url: `https://api.spoonacular.com/food/ingredients/9266/information?${query}&amount=${amount} `
+// method: "get",
+// }
+// const Response = await axios(config);
+// //irgendwas mit dem Response object machen
+// console(Response.data);
+// //…
+// }

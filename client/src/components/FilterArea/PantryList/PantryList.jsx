@@ -6,10 +6,15 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import Checkbox from '@mui/material/Checkbox';
 import IconButton from '@mui/material/IconButton';
-import CommentIcon from '@mui/icons-material/Comment';
+import DeleteIcon from '@mui/icons-material/Delete';
 
-export default function PantryList() {
+export default function PantryList({pantry, setPantry}) {
   const [checked, setChecked] = React.useState([0]);
+
+  const handleDelete = (pantryToRemove) => {
+  setPantry((prev) => prev.filter(item => item !== pantryToRemove));
+  };
+
 
   const handleToggle = (value) => () => {
     const currentIndex = checked.indexOf(value);
@@ -26,15 +31,15 @@ export default function PantryList() {
 
   return (
     <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
-      {[0, 1, 2, 3].map((value) => {
+      {pantry.map((value, index) => {
         const labelId = `checkbox-list-label-${value}`;
 
         return (
           <ListItem
-            key={value}
+            key={index}
             secondaryAction={
-              <IconButton edge="end" aria-label="comments">
-                <CommentIcon />
+              <IconButton edge="end" aria-label="comments" onClick={() => handleDelete(value)}>
+                <DeleteIcon />
               </IconButton>
             }
             disablePadding
@@ -49,7 +54,7 @@ export default function PantryList() {
                   inputProps={{ 'aria-labelledby': labelId }}
                 />
               </ListItemIcon>
-              <ListItemText id={labelId} primary={`Line item ${value + 1}`} />
+              <ListItemText id={labelId} primary={`${value}`} />
             </ListItemButton>
           </ListItem>
         );
