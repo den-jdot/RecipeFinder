@@ -30,7 +30,7 @@ export default function PantryList({pantry, setPantry}) {
   };
 
   return (
-    <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+    <List sx={{ width: '98%', maxWidth: 360, bgcolor: 'background.paper' }}>
       {pantry.map((value, index) => {
         const labelId = `checkbox-list-label-${value}`;
 

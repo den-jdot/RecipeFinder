@@ -39,3 +39,13 @@ export default function ResultItem(props) {
     </Card>
   );
 }
+
+
+// //state bsp [recipes,setRecipes = useState([]);
+// State in der Komponente erstellen und bis setter (setRecipes) zum "button" durchgeben
+// setter setzt Response.data
+// State daten (recipes) durchgeben zur der darstellenden Komponente. Verwende Mapfunktion und stelle die properties dar die du brauchst z.B
+//      `recipes.map( el => return (
+//           <h1>el.title</h1>
+//           …
+//      ) https://spoonacular.com/food-api/docs#Get-Analyzed-Recipe-Instructions

@@ -1,11 +1,12 @@
 import * as React from 'react';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
+import axios from 'axios';
 
 export default function GenButton({pantry}) {
 
   const handleQuery = () => {
-  let query = '<url>?ingredients=';
+  let query = 'ingredients=';
 
   pantry.forEach((item, index) => {
     if (index === 0) {
@@ -15,13 +16,28 @@ export default function GenButton({pantry}) {
     }
   });
 
-  const url = `${query}`;
+  const url = `https://api.spoonacular.com/recipes/findByIngredients?apiKey=e7330c2aa0b44eb0aa51874ed4bcd670&${query}`;
   console.log(url);
+  return url;
   };
+
+  const getRecipes = async () => {
+    const config = {
+     url: handleQuery(), 
+     method: "get",
+    };
+    try {
+      const response = await axios(config);
+      console.log(response);
+      console.log(response.data);
+    } catch (error) {
+      console.error("Error fetching recipes:", error);
+    }
+  }
 
   return (
     <Stack className="GenButton" direction="row" spacing={2}>
-      <Button variant="contained" onClick={handleQuery}>Run App</Button>
+      <Button variant="contained" onClick={getRecipes}>Run App</Button>
 
     </Stack>
   );

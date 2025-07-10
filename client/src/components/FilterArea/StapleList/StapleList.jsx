@@ -16,7 +16,7 @@ const handleDelete = (stapleToRemove) => {
   };
 
   return (
-    <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+    <List sx={{ width: '98%', maxWidth: 360, bgcolor: 'background.paper' }}>
       {staples.map((value, index) => {
         const labelId = `checkbox-list-label-${value}`;
 

@@ -43,12 +43,10 @@ return (
             
         </div>
 
-        <div className="FilterAreaPantry">
-            <IngredientsToggle></IngredientsToggle>
-        </div>
+        <IngredientsToggle></IngredientsToggle>
 
         <div className="IngredientsArea">
-
+            
             <div className="StapleArea">
                 <StapleToggle showStaples={showStaples} setShowStaples={setShowStaples}></StapleToggle>
                 {/*if showStaples = true, then show list, otherwise null
