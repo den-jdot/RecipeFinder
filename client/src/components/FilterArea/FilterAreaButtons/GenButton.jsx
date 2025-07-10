@@ -5,13 +5,13 @@ import Stack from '@mui/material/Stack';
 export default function GenButton({pantry}) {
 
   const handleQuery = () => {
-  let query = 'ingredients=';
+  let query = '<url>?ingredients=';
 
   pantry.forEach((item, index) => {
     if (index === 0) {
-      query += item.trim(); // first item, no separator
+      query += item.trim();
     } else {
-      query += ',+' + item.trim(); // add separator before item
+      query += ',+' + item.trim();
     }
   });
 
