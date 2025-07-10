@@ -2,10 +2,26 @@ import * as React from 'react';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 
-export default function GenButton() {
+export default function GenButton({pantry}) {
+
+  const handleQuery = () => {
+  let query = 'ingredients=';
+
+  pantry.forEach((item, index) => {
+    if (index === 0) {
+      query += item.trim(); // first item, no separator
+    } else {
+      query += ',+' + item.trim(); // add separator before item
+    }
+  });
+
+  const url = `${query}`;
+  console.log(url);
+  };
+
   return (
     <Stack className="GenButton" direction="row" spacing={2}>
-      <Button variant="contained">Run App</Button>
+      <Button variant="contained" onClick={handleQuery}>Run App</Button>
 
     </Stack>
   );

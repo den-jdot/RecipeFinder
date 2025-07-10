@@ -39,7 +39,7 @@ return (
                 <DiffField></DiffField>
             </div>
             </div>
-            <GenButton></GenButton>
+            <GenButton pantry={pantry}></GenButton>
             
         </div>
 
