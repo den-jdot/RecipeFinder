@@ -27,7 +27,7 @@ function App() {
     }
   });
 
-  const [recipes, setRecipes] = useState(() => {
+  const [recipeResults, setRecipeResults] = useState(() => {
     try {
       const stored = localStorage.getItem('recipes');
       const parsed = JSON.parse(stored);
@@ -64,8 +64,8 @@ function App() {
     }, [pantry]);
 
   useEffect(() => {
-    localStorage.setItem('recipes', JSON.stringify(recipes));
-  }, [recipes]);
+    localStorage.setItem('recipeResults', JSON.stringify(recipeResults));
+  }, [recipeResults]);
 
   useEffect(() => {
     localStorage.setItem('showStaples', JSON.stringify(showStaples));
@@ -87,7 +87,9 @@ function App() {
       showStaples={showStaples}
       setShowStaples={setShowStaples}
       showPantry={showPantry}
-      setShowPantry={setShowPantry}>
+      setShowPantry={setShowPantry}
+      recipeResults={recipeResults}
+      setRecipeResults={setRecipeResults}>
     </FilterArea>
 
     <div className="divider" />

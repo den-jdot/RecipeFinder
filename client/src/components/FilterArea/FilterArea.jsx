@@ -19,7 +19,8 @@ const FilterArea = ({
     staples, setStaples,
     pantry, setPantry,
     showStaples, setShowStaples,
-    showPantry, setShowPantry
+    showPantry, setShowPantry,
+    recipeResults, setRecipeResults
  }) => {
 
     const addStaple = (item) => setStaples((prev) => [...prev, item]);
@@ -39,7 +40,7 @@ return (
                 <DiffField></DiffField>
             </div>
             </div>
-            <GenButton pantry={pantry}></GenButton>
+            <GenButton pantry={pantry} recipeResults={recipeResults} setRecipeResults={setRecipeResults}></GenButton>
             
         </div>
 
