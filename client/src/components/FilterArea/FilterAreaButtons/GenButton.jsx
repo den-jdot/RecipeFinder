@@ -62,7 +62,7 @@ export default function GenButton({ pantry, keyword, recipeResults, setRecipeRes
       setRecipeResults(bulkResponse.data);
 
       // Save to localStorage
-      localStorage.setItem('recipes', JSON.stringify(bulkResponse.data));
+      localStorage.setItem('recipeResults', JSON.stringify(bulkResponse.data));
 
       console.log("Full recipe info:", bulkResponse.data);
     } catch (error) {

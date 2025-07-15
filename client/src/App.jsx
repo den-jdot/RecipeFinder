@@ -29,7 +29,7 @@ function App() {
 
   const [recipeResults, setRecipeResults] = useState(() => {
     try {
-      const stored = localStorage.getItem('recipes');
+      const stored = localStorage.getItem('recipeResults');
       const parsed = JSON.parse(stored);
       return Array.isArray(parsed) ? parsed : [];
     } catch {
@@ -93,7 +93,9 @@ function App() {
     </FilterArea>
 
     <div className="divider" />
-    <ResultArea></ResultArea>
+    <ResultArea
+      recipeResults={recipeResults}>
+    </ResultArea>
     <div className="divider" />
     <RecipeArea></RecipeArea>
     <div className="divider" />

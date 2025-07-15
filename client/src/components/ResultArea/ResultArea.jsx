@@ -5,7 +5,8 @@ import ResultItem from './ResultItem';
 import { HeroHeader } from '../HeroHeader';
 // import PageviewTwoToneIcon from '@mui/icons-material/PageviewTwoTone';
 
-const ResultArea = () => {
+const ResultArea = ({recipeResults}) => {
+    console.log('recipeResults:', recipeResults);
 return (
     <>
     <div className="ResultArea">
@@ -15,17 +16,18 @@ return (
             
         </div>
 
+    {Array.isArray(recipeResults) && recipeResults.length > 0 ? (
+        recipeResults.map((recipe) => (
         <ResultItem
-        dish="Chicken Curry"
-        itemAmount="16 items (6 staples)"
-        details="A delicious chicken curry recipe with a blend of spices and herbs."
-        ></ResultItem>
-
-        <ResultItem
-        dish="Chicken Curry"
-        itemAmount="16 items (6 staples)"
-        details="A delicious chicken curry recipe with a blend of spices and herbs."
-        ></ResultItem>
+        key={recipe.id}
+        dish={recipe.title}
+        details={recipe.summary}
+        itemAmount={`${recipe.extendedIngredients.length} ingredients`}
+        />
+        ))
+    ) : (
+    <p>No recipes found yet.</p>
+    )}
                
 
     </div>
