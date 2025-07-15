@@ -3,7 +3,7 @@ import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import axios from 'axios';
 
-export default function GenButton({ pantry, keyword, recipeResults, setRecipeResults }) {
+export default function GenButton({ pantry, checked, keyword, recipeResults, setRecipeResults }) {
   const apiKey = import.meta.env.VITE_SPOONACULAR_API_KEY;
 
   const handleQuery = () => {
@@ -15,19 +15,11 @@ export default function GenButton({ pantry, keyword, recipeResults, setRecipeRes
     }
 
     // Add ingredients one by one
-    if (pantry && pantry.length > 0) {
-      let ingredientsParam = '';
-      pantry.forEach((item, index) => {
-        if (index === 0) {
-          ingredientsParam += item.trim();
-        } else {
-          ingredientsParam += ',' + item.trim();
-        }
-      });
+    if (checked && checked.length > 0) {
+      const ingredientsParam = checked.map(item => item.trim()).join(',');
       url += `&includeIngredients=${encodeURIComponent(ingredientsParam)}`;
+      console.log('Checked items: ', ingredientsParam);
     }
-
-    console.log(pantry);
 
     url += `&number=10`; // how many recipes to fetch
     return url;

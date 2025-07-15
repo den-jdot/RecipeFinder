@@ -23,8 +23,25 @@ const FilterArea = ({
     recipeResults, setRecipeResults
  }) => {
 
+    const [checked, setChecked] = React.useState(() => {
+        try {
+            const stored = localStorage.getItem('checked');
+            const parsed = JSON.parse(stored);
+            return Array.isArray(parsed) ? parsed : [];
+        } catch {
+            return [];
+        }
+    });
+
+    useEffect(() => {
+        localStorage.setItem('checked', JSON.stringify(checked));
+    }, [checked]);
+
     const addStaple = (item) => setStaples((prev) => [...prev, item]);
-    const addPantry = (item) => setPantry((prev) => [...prev, item]);
+    const addPantry = (item) => {
+        setPantry((prev) => [...prev, item]);
+        setChecked((prev) => [...prev, item]);
+    };
     
 
 return (
@@ -40,7 +57,7 @@ return (
                 <DiffField></DiffField>
             </div>
             </div>
-            <GenButton pantry={pantry} recipeResults={recipeResults} setRecipeResults={setRecipeResults}></GenButton>
+            <GenButton pantry={pantry} checked={checked} recipeResults={recipeResults} setRecipeResults={setRecipeResults}></GenButton>
             
         </div>
 
@@ -61,12 +78,19 @@ return (
             </div>
         
             <div className="PantryArea">
-                <PantryToggle showPantry={showPantry} setShowPantry={setShowPantry}></PantryToggle>
+                <PantryToggle 
+                showPantry={showPantry} 
+                setShowPantry={setShowPantry}>
+                </PantryToggle>
                 {/*if showPantry = true, then show list, otherwise null
                 showPantry ? <PantryList : null*/}
                 {showPantry && (
                     <>
-                        <PantryList pantry={pantry} setPantry={setPantry}></PantryList>
+                        <PantryList 
+                        pantry={pantry} 
+                        setPantry={setPantry} 
+                        checked={checked}
+                        setChecked={setChecked}> </PantryList>
                         <AddField onAdd={addPantry}></AddField>
                     </>
                 )}

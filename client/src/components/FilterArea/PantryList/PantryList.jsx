@@ -8,11 +8,11 @@ import Checkbox from '@mui/material/Checkbox';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 
-export default function PantryList({pantry, setPantry}) {
-  const [checked, setChecked] = React.useState([0]);
+export default function PantryList({pantry, setPantry, checked, setChecked}) {
 
   const handleDelete = (pantryToRemove) => {
   setPantry((prev) => prev.filter(item => item !== pantryToRemove));
+  setChecked((prev) => prev.filter(item => item !== pantryToRemove));
   };
 
 
