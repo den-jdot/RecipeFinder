@@ -5,8 +5,10 @@ import ResultItem from './ResultItem';
 import { HeroHeader } from '../HeroHeader';
 // import PageviewTwoToneIcon from '@mui/icons-material/PageviewTwoTone';
 
-const ResultArea = ({recipeResults}) => {
+const ResultArea = ({recipeResults, selectedRecipe, setSelectedRecipe}) => {
     console.log('recipeResults:', recipeResults);
+
+
 return (
     <>
     <div className="ResultArea">
@@ -20,9 +22,14 @@ return (
         recipeResults.map((recipe) => (
         <ResultItem
         key={recipe.id}
+        id={recipe.id}
         dish={recipe.title}
-        details={recipe.summary}
+        image={recipe.image}
+        readyInMinutes={recipe.readyInMinutes}
+        selected={recipe.id === selectedRecipe?.id}
         itemAmount={`${recipe.extendedIngredients.length} ingredients`}
+        onSelect={() => 
+            setSelectedRecipe((prev) => (prev?.id === recipe.id ? null : recipe))}
         />
         ))
     ) : (

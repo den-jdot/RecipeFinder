@@ -7,8 +7,11 @@ import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
 
 export default function ResultItem(props) {
+
+  // const [selectedId, setSelectedId] = useState(null);
+
   return (
-    <Card variant="outlined" sx={{ maxWidth: 360 }}>
+    <Card className={`ResultItem ${props.selected ? 'selected' : ''}`} variant="outlined" sx={{ maxWidth: 360 }} onClick={props.onSelect}>
       <Box sx={{ p: 2 }}>
         <Stack
           direction="row"
@@ -18,24 +21,31 @@ export default function ResultItem(props) {
             {props.dish}
           </Typography>
         </Stack>
-        <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-          {props.details}
-        </Typography>
+      <img
+        src={props.image}
+        alt={props.title}
+        style={{ maxWidth: '100%', height: 'auto', borderRadius: '8px' }}
+      />
         </Box>
         <Divider sx={{ width: '100%'}} />
-        <Box sx={{ p: 2 }}>
+        <Box sx={{ p: 1 }}>
           <Typography gutterBottom variant="body2" component="div">
             {props.itemAmount}
           </Typography>
         </Box>
       <Divider sx={{ width: '100%'}} />
-      <Box sx={{ p: 2 }}>
+        <Box sx={{ p: 1 }}>
+          <Typography gutterBottom variant="body2" component="div">
+            {props.readyInMinutes} minutes
+          </Typography>
+        </Box>
+      {/* <Box sx={{ p: 2 }}>
         <Stack direction="row" spacing={1}>
           <Chip color="primary" label="Easy" size="small" />
           <Chip label="Medium" size="small" />
           <Chip label="Hard" size="small" />
         </Stack>
-      </Box>
+      </Box> */}
     </Card>
   );
 }

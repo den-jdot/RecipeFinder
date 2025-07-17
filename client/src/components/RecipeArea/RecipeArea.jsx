@@ -3,16 +3,22 @@ import { useState } from 'react';
 import { HeroHeader } from '../HeroHeader';
 import Button from '@mui/material/Button';
 
-const RecipeArea = () => {
+const RecipeArea = ({selectedRecipe}) => {
+  const servings = selectedRecipe.servings || 1;
   const [portions, setPortions] = useState(1);
   const [portionInput, setPortionInput] = useState("1");
 
-  const ingredients = [
-    { name: 'Water', unit: 'ml', amountPerPortion: 120 },
-    { name: 'Flour', unit: 'g', amountPerPortion: 200 },
-    { name: 'Salt', unit: 'g', amountPerPortion: 4 },
-    { name: 'Yeast', unit: 'g', amountPerPortion: 2 },
-  ];
+    if (!selectedRecipe) {
+    return (
+      <div className="RecipeArea">
+        <HeroHeader text="Recipe Details" />
+        <p>Select a recipe to see details.</p>
+      </div>
+    );
+  }
+
+  const ingredients = selectedRecipe.extendedIngredients || [];
+  const steps = selectedRecipe.analyzedInstructions?.[0]?.steps || [];
 
     const handlePortionChange = (e) => {
       const value = e.target.value;
@@ -29,19 +35,40 @@ const RecipeArea = () => {
       <div className="RecipeArea">
         <HeroHeader text="Recipe Details" />
 
-        <h2>Pizzateig</h2>
+        <h2>{selectedRecipe.title}</h2>
 
-        <ul className="ingredient-list">
-          {ingredients.map((item, index) => (
+        <img
+          src={selectedRecipe.image} />
+
+      <ul className="ingredient-list">
+        {ingredients.map((item, index) => {
+          const unit = item.measures.metric.unitShort.toLowerCase();
+          const isScalable = unit !== "servings";
+
+          const rawAmount = item.measures.metric.amount;
+          const baseAmount = selectedRecipe.servings && isScalable
+            ? rawAmount / selectedRecipe.servings
+            : rawAmount;
+
+          const displayAmount = isScalable ? baseAmount * portions : rawAmount;
+
+          return (
             <li key={index}>
-              {item.name}{' '}
-              <span className="ingredient-amount">
-                {item.amountPerPortion * ( portions || 0)}
-                {item.unit}
-              </span>
+              {isScalable ? (
+                <>
+                  <span className="ingredient-amount">
+                    {Math.round(displayAmount * 10) / 10}
+                    {` ${item.measures.metric.unitShort}`}
+                  </span>{" "}
+                  - {item.name}
+                </>
+              ) : (
+                <>{item.name}</>
+              )}
             </li>
-          ))}
-        </ul>
+          );
+        })}
+      </ul>
 
         <h2>Portions</h2>
         <input
@@ -51,14 +78,16 @@ const RecipeArea = () => {
           style={{ width: '60px', marginBottom: '1rem' }}
         />
 
-        <h2>Difficulty</h2>
-        <p>
-          Easy
-        </p>
         <h2>Instructions</h2>
-        <p>
-          1. Dissolve the yeast in the lukewarm water. Then mix it with the flour and salt  in a bowl until a dough forms.
-        </p>
+          {steps.length > 0 ? (
+            <ol>
+              {steps.map((step) => (
+                <li key={step.number}>{step.step}</li>
+              ))}
+            </ol>
+          ) : (
+            <p>No detailed instructions available.</p>
+          )}
       </div>
     </>
   );

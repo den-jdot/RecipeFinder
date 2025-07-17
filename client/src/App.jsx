@@ -55,6 +55,8 @@ function App() {
     }
   });
 
+  const [selectedRecipe, setSelectedRecipe] = useState(null);
+
   useEffect(() => {
     localStorage.setItem('staples', JSON.stringify(staples));
   }, [staples]);
@@ -94,10 +96,12 @@ function App() {
 
     <div className="divider" />
     <ResultArea
-      recipeResults={recipeResults}>
+      recipeResults={recipeResults}
+      selectedRecipe={selectedRecipe}
+      setSelectedRecipe={setSelectedRecipe}>
     </ResultArea>
     <div className="divider" />
-    <RecipeArea></RecipeArea>
+    <RecipeArea selectedRecipe={selectedRecipe}></RecipeArea>
     <div className="divider" />
     <FavoritesArea></FavoritesArea>
     </main> 

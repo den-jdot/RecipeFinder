@@ -130,3 +130,14 @@ html, body {
   align-items: center;
   margin-top: 5px;
 }
+
+.ResultItem:hover {
+  background-color: #f0e4d7; /* light beige for hover effect */
+  cursor: pointer;
+
+}
+
+.ResultItem.selected {
+  border: 2px solid #1976d2; 
+  background-color: #e3f2fd; 
+}
