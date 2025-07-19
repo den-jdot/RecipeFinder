@@ -5,18 +5,18 @@ import { useState, useEffect, useRef } from 'react';
 
 export default function ViewToggle({ view, setView }) {
   const handleChange = (event, newValue) => {
-    if (newValue !== null) setView(newValue === 'on');
+    if (newValue !== null) setView(newValue === 'Search');
   };
 
   return (
     <ToggleButtonGroup
       color="primary"
-      value={view ? 'on' : 'off'}
+      value={view ? 'Search' : 'Favorites'}
       exclusive
       onChange={handleChange}
     >
-      <ToggleButton value="on">Search</ToggleButton>
-      <ToggleButton value="off">Favorites</ToggleButton>
+      <ToggleButton value="Search">Search</ToggleButton>
+      <ToggleButton value="Favorites">Favorites</ToggleButton>
     </ToggleButtonGroup>
   );
 }
