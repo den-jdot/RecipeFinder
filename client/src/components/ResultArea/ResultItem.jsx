@@ -36,7 +36,13 @@ export default function ResultItem(props) {
       <Divider sx={{ width: '100%'}} />
         <Box sx={{ p: 1 }}>
           <Typography gutterBottom variant="body2" component="div">
-            {props.readyInMinutes} minutes
+            {props.readyInMinutes} minutes || {props.weightWatcherSmartPoints} WW Points
+          </Typography>
+        </Box>
+      <Divider sx={{ width: '100%'}} />
+        <Box sx={{ p: 1 }}>
+          <Typography gutterBottom variant="body2" component="div">
+            {props.spoonacularScore?.toFixed(1)}% Score
           </Typography>
         </Box>
       {/* <Box sx={{ p: 2 }}>

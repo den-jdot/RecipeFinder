@@ -67,6 +67,7 @@ html, body {
   min-height: 0;
   max-height: 100vh;
   padding-top: 1rem;
+  font-family: 'Segoe UI', 'Helvetica Neue', sans-serif;
 }
 
 .FavoritesArea {
@@ -112,7 +113,7 @@ html, body {
   font-size: 2.25rem;
   font-weight: 650;
   color: #4a2f1c;          /* rich brown for warm contrast */
-  font-family: 'Segoe UI', 'Helvetica Neue', sans-serif;;
+  font-family: 'Segoe UI', 'Helvetica Neue', sans-serif;
   margin: 1rem 0;
   text-shadow: 1px 1px 0 #ffffff80; /* soft highlight for depth */
 }

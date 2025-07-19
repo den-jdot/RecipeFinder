@@ -25,9 +25,11 @@ return (
         id={recipe.id}
         dish={recipe.title}
         image={recipe.image}
-        readyInMinutes={recipe.readyInMinutes}
         selected={recipe.id === selectedRecipe?.id}
         itemAmount={`${recipe.extendedIngredients.length} ingredients`}
+        readyInMinutes={recipe.readyInMinutes}
+        weightWatcherSmartPoints={recipe.weightWatcherSmartPoints}
+        spoonacularScore={recipe.spoonacularScore}
         onSelect={() => 
             setSelectedRecipe((prev) => (prev?.id === recipe.id ? null : recipe))}
         />

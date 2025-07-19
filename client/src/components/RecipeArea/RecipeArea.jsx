@@ -4,7 +4,7 @@ import { HeroHeader } from '../HeroHeader';
 import Button from '@mui/material/Button';
 
 const RecipeArea = ({selectedRecipe}) => {
-  const servings = selectedRecipe.servings || 1;
+  
   const [portions, setPortions] = useState(1);
   const [portionInput, setPortionInput] = useState("1");
 
@@ -19,6 +19,7 @@ const RecipeArea = ({selectedRecipe}) => {
 
   const ingredients = selectedRecipe.extendedIngredients || [];
   const steps = selectedRecipe.analyzedInstructions?.[0]?.steps || [];
+  const servings = selectedRecipe.servings || 1;
 
     const handlePortionChange = (e) => {
       const value = e.target.value;
@@ -88,7 +89,24 @@ const RecipeArea = ({selectedRecipe}) => {
           ) : (
             <p>No detailed instructions available.</p>
           )}
+
+        <h2>Sources</h2>
+        <p>
+          Original Recipe:&nbsp;
+          <a href={selectedRecipe.sourceUrl} target="_blank" rel="noopener noreferrer">
+            {selectedRecipe.sourceName || 'Link'} 
+          </a>
+          <span> | </span>
+          <a href={selectedRecipe.spoonacularSourceUrl} target="_blank" rel="noopener noreferrer">
+            {'Spoonacular' || 'Link'}
+          </a>
+        </p>
+
+
+
       </div>
+
+      
     </>
   );
 };

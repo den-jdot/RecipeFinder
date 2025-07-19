@@ -13,14 +13,13 @@ import AddField from '../AddField';
 import ScopeField from './FilterAreaButtons/ScopeField';
 import DiffField from './FilterAreaButtons/DiffField';
 
-
-
 const FilterArea = ({ 
     staples, setStaples,
     pantry, setPantry,
     showStaples, setShowStaples,
     showPantry, setShowPantry,
-    recipeResults, setRecipeResults
+    recipeResults, setRecipeResults,
+    keywordRef
  }) => {
 
     const [checked, setChecked] = React.useState(() => {
@@ -51,13 +50,13 @@ return (
         <div className="FilterAreaButtons">
             <div className="FilterAreaButtonsLeft">
             <SourceSelector></SourceSelector>
-            <KeywordField></KeywordField>
+            <KeywordField keywordRef={keywordRef}></KeywordField>
             <div className="OptionalFields">
                 <ScopeField></ScopeField>
                 <DiffField></DiffField>
             </div>
             </div>
-            <GenButton pantry={pantry} checked={checked} recipeResults={recipeResults} setRecipeResults={setRecipeResults}></GenButton>
+            <GenButton pantry={pantry} checked={checked} keywordRef={keywordRef} recipeResults={recipeResults} setRecipeResults={setRecipeResults}></GenButton>
             
         </div>
 

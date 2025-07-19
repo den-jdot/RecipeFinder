@@ -2,7 +2,7 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 
-export default function KeywordField() {
+export default function KeywordField({ keywordRef }) {
   return (
     <Box
       component="form"
@@ -16,8 +16,9 @@ export default function KeywordField() {
           label="Search"
           multiline
           rows={4}
-          placeholder="Placeholder"
+          placeholder="Enter keywords like 'chicken, pasta...'"
           variant="filled"
+          inputRef={keywordRef}
         />
       </div>
     </Box>

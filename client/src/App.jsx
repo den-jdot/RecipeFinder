@@ -57,6 +57,8 @@ function App() {
 
   const [selectedRecipe, setSelectedRecipe] = useState(null);
 
+  const keywordRef = useRef();
+
   useEffect(() => {
     localStorage.setItem('staples', JSON.stringify(staples));
   }, [staples]);
@@ -91,7 +93,8 @@ function App() {
       showPantry={showPantry}
       setShowPantry={setShowPantry}
       recipeResults={recipeResults}
-      setRecipeResults={setRecipeResults}>
+      setRecipeResults={setRecipeResults}
+      keywordRef={keywordRef}>
     </FilterArea>
 
     <div className="divider" />
