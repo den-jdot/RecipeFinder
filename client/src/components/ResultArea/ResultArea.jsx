@@ -3,9 +3,10 @@ import Button from '@mui/material/Button';
 import { useRef, useState, useEffect } from 'react';
 import ResultItem from './ResultItem';
 import { HeroHeader } from '../HeroHeader';
+import ViewToggle from './ViewToggle';
 // import PageviewTwoToneIcon from '@mui/icons-material/PageviewTwoTone';
 
-const ResultArea = ({recipeResults, selectedRecipe, setSelectedRecipe, staples, favorites, setFavorites}) => {
+const ResultArea = ({recipeResults, selectedRecipe, setSelectedRecipe, staples, favorites, setFavorites, view, setView}) => {
     console.log('recipeResults:', recipeResults);
 
 
@@ -14,6 +15,7 @@ return (
     
     <div className="ResultArea">
         <div className="ResultAreaHeader">
+            <ViewToggle view={view} setView={setView}></ViewToggle>
             {/* <PageviewTwoToneIcon /> */}
             <HeroHeader text="Recipe Results" />
             

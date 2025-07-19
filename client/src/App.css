@@ -142,3 +142,8 @@ html, body {
   border: 2px solid #1976d2; 
   background-color: #e3f2fd; 
 }
+
+.ResultAreaHeader {
+  display: flex;
+  flex-direction: column;
+}

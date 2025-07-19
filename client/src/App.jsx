@@ -57,7 +57,7 @@ function App() {
 
   const [selectedRecipe, setSelectedRecipe] = useState(null);
 
-  const [view, setView] = useState('search');
+  const [view, setView] = useState(true);
 
   const [useIngredients, setUseIngredients] = useState(true);
 
@@ -70,6 +70,8 @@ function App() {
       return [];
     }
   });
+
+  console.log("Favorites array:", favorites);
 
   const keywordRef = useRef();
 
@@ -124,12 +126,14 @@ function App() {
       setSelectedRecipe={setSelectedRecipe}
       staples={staples}
       favorites={favorites}
-      setFavorites={setFavorites}>
+      setFavorites={setFavorites}
+      view={view}
+      setView={setView}>
     </ResultArea>
     <div className="divider" />
     <RecipeArea selectedRecipe={selectedRecipe}></RecipeArea>
     <div className="divider" />
-    <FavoritesArea></FavoritesArea>
+    {/* <FavoritesArea></FavoritesArea> */}
     </main> 
     </>
   )
