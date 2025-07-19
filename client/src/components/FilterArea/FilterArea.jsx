@@ -19,7 +19,8 @@ const FilterArea = ({
     showStaples, setShowStaples,
     showPantry, setShowPantry,
     recipeResults, setRecipeResults,
-    keywordRef
+    keywordRef,
+    useIngredients, setUseIngredients
  }) => {
 
     const [checked, setChecked] = React.useState(() => {
@@ -56,11 +57,22 @@ return (
                 <DiffField></DiffField>
             </div> */}
             </div>
-            <GenButton pantry={pantry} checked={checked} keywordRef={keywordRef} recipeResults={recipeResults} setRecipeResults={setRecipeResults}></GenButton>
+            <GenButton 
+                pantry={pantry} 
+                checked={checked} 
+                keywordRef={keywordRef} 
+                useIngredients={useIngredients} 
+                setUseIngredients={setUseIngredients} 
+                recipeResults={recipeResults} 
+                setRecipeResults={setRecipeResults}>
+            </GenButton>
             
         </div>
 
-        <IngredientsToggle></IngredientsToggle>
+        <IngredientsToggle
+            useIngredients={useIngredients}
+            setUseIngredients={setUseIngredients}>
+        </IngredientsToggle>
 
         <div className="IngredientsArea">
             

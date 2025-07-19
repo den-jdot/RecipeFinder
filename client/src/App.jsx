@@ -59,6 +59,8 @@ function App() {
 
   const [view, setView] = useState('search');
 
+  const [useIngredients, setUseIngredients] = useState(true);
+
   const [favorites, setFavorites] = useState(() => {
     try {
       const stored = localStorage.getItem('favorites');
@@ -110,7 +112,9 @@ function App() {
       setShowPantry={setShowPantry}
       recipeResults={recipeResults}
       setRecipeResults={setRecipeResults}
-      keywordRef={keywordRef}>
+      keywordRef={keywordRef}
+      useIngredients={useIngredients}
+      setUseIngredients={setUseIngredients}>
     </FilterArea>
 
     <div className="divider" />

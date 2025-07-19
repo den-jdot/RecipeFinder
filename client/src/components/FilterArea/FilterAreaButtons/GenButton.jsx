@@ -2,113 +2,82 @@ import * as React from 'react';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import axios from 'axios';
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
 
-export default function GenButton({ pantry, checked, keywordRef, recipeResults, setRecipeResults }) {
+export default function GenButton({ pantry, checked, keywordRef, recipeResults, setRecipeResults, useIngredients }) {
   const apiKey = import.meta.env.VITE_SPOONACULAR_API_KEY;
 
+  const [errorOpen, setErrorOpen] = React.useState(false);
+  const [errorMessage, setErrorMessage] = React.useState('');
+
   const handleQuery = () => {
+    const keyword = keywordRef?.current?.value.trim() ?? '';
+    const hasKeyword = keyword.length > 0;
+    const hasIngredients = checked && checked.length > 0;
+
+    if (useIngredients) {
+      if (!hasKeyword && !hasIngredients) {
+        throw new Error("Please enter a keyword or select at least one ingredient.");
+      }
+    } else {
+      if (!hasKeyword) {
+        throw new Error("Please enter a keyword when ingredients are turned off.");
+      }
+    }
+
     let url = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiKey}`;
 
-    // Add keyword if present
-    const keyword = keywordRef?.current?.value ?? '';
-    if (keyword.trim()) {
-      url += `&query=${encodeURIComponent(keyword.trim())}`;
+    if (hasKeyword) {
+      url += `&query=${encodeURIComponent(keyword)}`;
     }
 
-    console.log("Keyword: ", keyword);
-
-    // Add ingredients one by one
-    if (checked && checked.length > 0) {
+    if (useIngredients && hasIngredients) {
       const ingredientsParam = checked.map(item => item.trim()).join(',');
       url += `&includeIngredients=${encodeURIComponent(ingredientsParam)}`;
-      console.log('Checked items: ', ingredientsParam);
     }
 
-    console.log('Generated URL: ', url);
+    console.log('Generated URL:', url);
     return url;
   };
 
-  // Fetch recipes and their full data
   const getRecipes = async () => {
     try {
       const searchUrl = handleQuery();
       const response = await axios.get(searchUrl);
 
-      // Get the recipe IDs
-      let idParam = '';
-      response.data.results.forEach((recipe, index) => {
-        if (index === 0) {
-          idParam += recipe.id;
-        } else {
-          idParam += ',' + recipe.id;
-        }
-      });
-
-      if (!idParam) {
-        console.warn("No recipe IDs found.");
-        return;
+      const ids = response.data.results.map(r => r.id).join(',');
+      if (!ids) {
+        throw new Error("No recipe IDs found.");
       }
 
-      // Fetch full info with informationBulk
-      const bulkUrl = `https://api.spoonacular.com/recipes/informationBulk?apiKey=${apiKey}&ids=${idParam}`;
+      const bulkUrl = `https://api.spoonacular.com/recipes/informationBulk?apiKey=${apiKey}&ids=${ids}`;
       const bulkResponse = await axios.get(bulkUrl);
 
-      // Save to React state
       setRecipeResults(bulkResponse.data);
-
-      // Save to localStorage
       localStorage.setItem('recipeResults', JSON.stringify(bulkResponse.data));
-
       console.log("Full recipe info:", bulkResponse.data);
     } catch (error) {
       console.error("Error fetching recipes:", error);
+      setErrorMessage(error.message || "An unexpected error occurred.");
+      setErrorOpen(true);
     }
   };
 
   return (
     <Stack className="GenButton" direction="row" spacing={2}>
       <Button variant="contained" onClick={getRecipes}>Run App</Button>
+      
+      <Snackbar
+        open={errorOpen}
+        autoHideDuration={3000}
+        onClose={() => setErrorOpen(false)}
+        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+      >
+        <Alert onClose={() => setErrorOpen(false)} severity="error" sx={{ width: '100%' }}>
+          {errorMessage}
+        </Alert>
+      </Snackbar>
     </Stack>
   );
 }
-
-
-// // let paramString += Array.map((el,idx) => {
-//       if(idx == 0) {
-//          return `${el} `
-//      } else {
-//         return ,+${el} `
-//  }
-
-// //Format: "<url>?ingridients="apple,+banana,+kiwi,...+,Grape";
-
-// async function getRecipes() {
-// query =   ingridients= ${deineAufgabe}  `
-// const config = {
-// url: `https://api.spoonacular.com/food/ingredients/9266/information?${query}&amount=${amount} `
-// method: "get",
-// }
-// const Response = await axios(config);
-// //irgendwas mit dem Response object machen
-// console(Response.data);
-// //…
-// }
-
-// OLD CODE
-// import * as React from 'react';
-// import Button from '@mui/material/Button';
-// import Stack from '@mui/material/Stack';
-// import axios from 'axios';
-
-// export default function GenButton({pantry}) {
-
-//   const handleQuery = () => {
-//   let query = 'ingredients=';
-
-//   pantry.forEach((item, index) => {
-//     if (index === 0) {
-//       query += item.trim();
-//     } else {
-//       query += ',+' + item.trim();
-//     }
-//   });

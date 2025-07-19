@@ -5,23 +5,21 @@ import { useState, useEffect, useRef } from 'react';
 
 //UNUSED NOW
 
-export default function IngredientsToggle() {
-  const [alignment, setAlignment] = React.useState('web');
-
-  const handleChange = (event, newAlignment) => {
-    setAlignment(newAlignment);
+export default function IngredientsToggle({ useIngredients, setUseIngredients }) {
+  const handleChange = (event, newValue) => {
+    if (newValue !== null) setUseIngredients(newValue === 'on');
   };
 
   return (
     <ToggleButtonGroup
       color="primary"
-      value={alignment}
+      value={useIngredients ? 'on' : 'off'}
       exclusive
       onChange={handleChange}
-      aria-label="Platform"
+      aria-label="ingredient-usage"
     >
-      <ToggleButton value="web">Ingredients on</ToggleButton>
-      <ToggleButton value="android">Ingredients off</ToggleButton>
+      <ToggleButton value="on">Ingredients On</ToggleButton>
+      <ToggleButton value="off">Ingredients Off</ToggleButton>
     </ToggleButtonGroup>
   );
 }
