@@ -8,7 +8,13 @@ import Typography from '@mui/material/Typography';
 
 export default function ResultItem(props) {
 
-  // const [selectedId, setSelectedId] = useState(null);
+  const ingredients = props.ingredients || [];
+  const totalIngredients = ingredients.length;
+
+  const stapleSet = new Set(props.staples?.map(s => s.toLowerCase()));
+  const stapleCount = ingredients.filter(i =>
+    stapleSet.has(i.name.toLowerCase())
+  ).length;
 
   return (
     <Card className={`ResultItem ${props.selected ? 'selected' : ''}`} variant="outlined" sx={{ maxWidth: 360 }} onClick={props.onSelect}>
@@ -31,6 +37,9 @@ export default function ResultItem(props) {
         <Box sx={{ p: 1 }}>
           <Typography gutterBottom variant="body2" component="div">
             {props.itemAmount}
+          </Typography>
+          <Typography gutterBottom variant="body2" component="div">
+            {totalIngredients} ingredients ({stapleCount} staples)
           </Typography>
         </Box>
       <Divider sx={{ width: '100%'}} />

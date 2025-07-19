@@ -57,6 +57,8 @@ function App() {
 
   const [selectedRecipe, setSelectedRecipe] = useState(null);
 
+  const [selectedList, setSelectedList] = useState(null);
+
   const keywordRef = useRef();
 
   useEffect(() => {
@@ -101,7 +103,8 @@ function App() {
     <ResultArea
       recipeResults={recipeResults}
       selectedRecipe={selectedRecipe}
-      setSelectedRecipe={setSelectedRecipe}>
+      setSelectedRecipe={setSelectedRecipe}
+      staples={staples}>
     </ResultArea>
     <div className="divider" />
     <RecipeArea selectedRecipe={selectedRecipe}></RecipeArea>
