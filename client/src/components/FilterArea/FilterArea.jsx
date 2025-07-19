@@ -51,10 +51,10 @@ return (
             <div className="FilterAreaButtonsLeft">
             <SourceSelector></SourceSelector>
             <KeywordField keywordRef={keywordRef}></KeywordField>
-            <div className="OptionalFields">
+            {/* <div className="OptionalFields">
                 <ScopeField></ScopeField>
                 <DiffField></DiffField>
-            </div>
+            </div> */}
             </div>
             <GenButton pantry={pantry} checked={checked} keywordRef={keywordRef} recipeResults={recipeResults} setRecipeResults={setRecipeResults}></GenButton>
             

@@ -3,6 +3,8 @@ import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import { useState, useEffect, useRef } from 'react';
 
+//UNUSED NOW
+
 export default function IngredientsToggle() {
   const [alignment, setAlignment] = React.useState('web');
 

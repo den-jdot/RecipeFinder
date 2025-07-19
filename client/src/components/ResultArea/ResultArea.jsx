@@ -11,13 +11,13 @@ const ResultArea = ({recipeResults, selectedRecipe, setSelectedRecipe, staples, 
 
 return (
     <>
+    
     <div className="ResultArea">
         <div className="ResultAreaHeader">
             {/* <PageviewTwoToneIcon /> */}
             <HeroHeader text="Recipe Results" />
             
         </div>
-
     {Array.isArray(recipeResults) && recipeResults.length > 0 ? (
         recipeResults.map((recipe) => (
         <ResultItem
