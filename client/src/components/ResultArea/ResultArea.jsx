@@ -5,7 +5,7 @@ import ResultItem from './ResultItem';
 import { HeroHeader } from '../HeroHeader';
 // import PageviewTwoToneIcon from '@mui/icons-material/PageviewTwoTone';
 
-const ResultArea = ({recipeResults, selectedRecipe, setSelectedRecipe, staples}) => {
+const ResultArea = ({recipeResults, selectedRecipe, setSelectedRecipe, staples, favorites, setFavorites}) => {
     console.log('recipeResults:', recipeResults);
 
 
@@ -26,12 +26,14 @@ return (
         dish={recipe.title}
         image={recipe.image}
         selected={recipe.id === selectedRecipe?.id}
-        // itemAmount={`${recipe.extendedIngredients.length} ingredients`}
+        // itemAmount={${recipe.extendedIngredients.length} ingredients}
         readyInMinutes={recipe.readyInMinutes}
         weightWatcherSmartPoints={recipe.weightWatcherSmartPoints}
         spoonacularScore={recipe.spoonacularScore}
         ingredients={recipe.extendedIngredients}
         staples={staples}
+        favorites={favorites}
+        setFavorites={setFavorites}
         onSelect={() => 
             setSelectedRecipe((prev) => (prev?.id === recipe.id ? null : recipe))}
         />

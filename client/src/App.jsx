@@ -57,7 +57,17 @@ function App() {
 
   const [selectedRecipe, setSelectedRecipe] = useState(null);
 
-  const [selectedList, setSelectedList] = useState(null);
+  const [view, setView] = useState('search');
+
+  const [favorites, setFavorites] = useState(() => {
+    try {
+      const stored = localStorage.getItem('favorites');
+      const parsed = JSON.parse(stored);
+      return Array.isArray(parsed) ? parsed : [];
+    } catch {
+      return [];
+    }
+  });
 
   const keywordRef = useRef();
 
@@ -80,6 +90,10 @@ function App() {
   useEffect(() => {
     localStorage.setItem('showPantry', JSON.stringify(showPantry));
   }, [showPantry]);
+
+  useEffect(() => {
+    localStorage.setItem('favorites', JSON.stringify(favorites));
+  }, [favorites]);
 
 
   return (
@@ -104,7 +118,9 @@ function App() {
       recipeResults={recipeResults}
       selectedRecipe={selectedRecipe}
       setSelectedRecipe={setSelectedRecipe}
-      staples={staples}>
+      staples={staples}
+      favorites={favorites}
+      setFavorites={setFavorites}>
     </ResultArea>
     <div className="divider" />
     <RecipeArea selectedRecipe={selectedRecipe}></RecipeArea>
